@@ -1,5 +1,4 @@
 package exception;
-
 public class InsufficientBalanceException extends Exception {
     private String message;
 

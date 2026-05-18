@@ -18,16 +18,13 @@ public class FileLogger {
         this.filePath += customer.getCustomerId() + ".txt";
     }
 
-    public void log(String message) {
+    public void log(String message) throws FileNotFoundException {
         try (PrintWriter out = new PrintWriter(new FileWriter(filePath, true))) {
             out.println("[ERROR] " + message);
-        } catch (FileNotFoundException e) {
-            System.err.println("Log file not found: " + filePath);
-        }
-         catch (IOException e) {
-            System.err.println("I/O error occurred while logging message.");
+        } catch (IOException e) {
+            System.err.println("IO Error occurred while logging message.");
         } catch (Exception e) {
-            System.err.println("An unexpected error occurred.");
+            System.out.println("An unexpected error occurred while logging message.");
             // e.printStackTrace();
         }
     }
