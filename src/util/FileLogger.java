@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import model.*;
 
 public class FileLogger {
-    private String filePath = "./Transactions/";
+    private String filePath = "./src/util/Transactions/";
 
     public FileLogger(Customer customer) {
         if (!new File(filePath).exists()) {
@@ -22,9 +22,10 @@ public class FileLogger {
         try (PrintWriter out = new PrintWriter(new FileWriter(filePath, true))) {
             out.println("[ERROR] " + message);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("I/O error occurred while logging message.");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("An unexpected error occurred.");
+            // e.printStackTrace();
         }
     }
 }
