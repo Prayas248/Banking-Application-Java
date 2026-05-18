@@ -5,20 +5,21 @@ import util.TransactionList;
 import java.time.LocalDateTime;
 
 public class Transaction{
-    private static int transactionId;
+    private static int counter;
+    private int transactionId;
     private final double amount;
     private final PaymentType type;
     private final LocalDateTime timestamp;
 
     public Transaction(double amount, PaymentType type) {
-        transactionId++;
+        this.transactionId = counter++;
         this.amount = amount;
         this.type = type;
         timestamp = new LocalDateTime.now();
         TransactionList.addTransaction(this);
     }
 
-    public static int getTransactionId() {
+    public int getTransactionId() {
         return transactionId;
     }
 
