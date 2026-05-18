@@ -19,8 +19,8 @@ public class TestFile {
 
         try {
             logger.log("This is a test message.");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred: " + e.getMessage());
         }
     }
 }

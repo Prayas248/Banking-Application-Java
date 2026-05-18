@@ -4,7 +4,9 @@ import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 import model.Customer;
 import exception.AccountNotFound;
+import util.FileLogger;
 
+import java.io.File;
 import java.nio.channels.FileLock;
 
 public interface WalletOperations {
@@ -26,7 +28,8 @@ class PaytmWallet implements WalletOperations{
     public void addMoney(double amount) throws InvalidAmountException {
         double updatedBalance = amount + this.walletBalance;
         if(walletBalance > 50000){
-
+            FileLogger logger = new FileLogger(customer);
+            logger.log("Wallet has exceeded the maximum amount");
             throw new InvalidAmountException("Wallet has exceeded the maximum amount");
         }
         else{
