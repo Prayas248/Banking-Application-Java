@@ -11,7 +11,7 @@ public class TransactionList{
 
     }
     public static void addTransaction(Transaction transaction){
-        Integer id =  Transaction.getTransactionId();
+        Integer id =  transaction.getTransactionId();
         ArrayList<Transaction> list = (ArrayList<Transaction>) transactionlist.get(id).clone();
         list.add(transaction);
         transactionlist.put(id, list);
