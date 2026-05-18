@@ -3,7 +3,7 @@ package exception;
 public class InvalidPhoneNumberException extends Exception{
     private String message;
 
-    InvalidPhoneNumberException(String message){
+    public InvalidPhoneNumberException(String message){
         this.message = message;
     }
 
