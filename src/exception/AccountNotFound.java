@@ -3,7 +3,7 @@ package exception;
 public class AccountNotFound extends Exception {
     private String message;
 
-    AccountNotFound(String message){
+    public AccountNotFound(String message){
         this.message = message;
     }
 
