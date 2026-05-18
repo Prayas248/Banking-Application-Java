@@ -1,13 +1,8 @@
 package exception;
 
-public class DuplicateCustomerException extends Exception{
-    private String message;
+public class DuplicateCustomerException extends Exception {
 
-    public DuplicateCustomerException(String message){
-        this.message = message;
-    }
-
-    public String toString(){
-        return message;
+    public DuplicateCustomerException(String message) {
+        super(message);
     }
 }

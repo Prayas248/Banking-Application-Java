@@ -2,7 +2,6 @@ package util;
 
 import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +17,7 @@ public class FileLogger {
         this.filePath += customer.getCustomerId() + ".txt";
     }
 
-    public void log(String message) throws FileNotFoundException {
+    public void log(String message) {
         try (PrintWriter out = new PrintWriter(new FileWriter(filePath, true))) {
             out.println("[ERROR] " + message);
         } catch (IOException e) {

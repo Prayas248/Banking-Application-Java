@@ -1,13 +1,8 @@
 package exception;
 
-public class InvalidEmailException extends Exception{
-    private String message;
+public class InvalidEmailException extends Exception {
 
-    public InvalidEmailException(String message){
-        this.message = message;
-    }
-
-    public String toString(){
-        return message;
+    public InvalidEmailException(String message) {
+        super(message);
     }
 }
