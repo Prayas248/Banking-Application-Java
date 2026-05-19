@@ -20,6 +20,7 @@ public class CurrentAccount extends BankAccount implements PaymentType {
             throw new InvalidAmountException("Deposit amount must be greater than zero");
         }
         setBalance(getBalance() + amount);
+        addTransaction(amount, "Current", this.getBalance());
 
         System.out.println("Deposited ₹" + amount + " | New Balance: ₹" + getBalance());
     }
@@ -33,6 +34,7 @@ public class CurrentAccount extends BankAccount implements PaymentType {
             throw new InsufficientBalanceException("Insufficient balance. Available: ₹" + getBalance());
         }
         setBalance(getBalance() - amount);
+        addTransaction(amount, "Current", this.getBalance());
         System.out.println("Withdrawn ₹" + amount + " | New Balance: ₹" + getBalance());
     }
 
@@ -49,6 +51,8 @@ public class CurrentAccount extends BankAccount implements PaymentType {
         }
         withdraw(amount);
         targetAccount.deposit(amount);
+        addTransaction(amount, "Current", this.getBalance());
+        targetAccount.addTransaction(amount, "Current", targetAccount.getBalance());
         System.out.println("Transferred ₹" + amount + " to Account #" + targetAccount.getAccountNumber());
     }
 

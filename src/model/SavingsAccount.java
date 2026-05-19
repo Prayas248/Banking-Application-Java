@@ -52,6 +52,8 @@ public class SavingsAccount extends BankAccount implements PaymentType {
         }
         withdraw(amount);
         targetAccount.deposit(amount);
+        addTransaction(amount, "Savings", this.getBalance());
+        targetAccount.addTransaction(amount, "Savings", targetAccount.getBalance());
         System.out.println("Transferred ₹" + amount + " to Account #" + targetAccount.getAccountNumber());
     }
 

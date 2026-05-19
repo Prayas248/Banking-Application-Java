@@ -23,15 +23,11 @@ public class Customer extends CustomerService {
     }
   public void addTransaction(double amount, String type, double balance) {
         Transaction curr = new Transaction(amount,type, balance);
-        System.out.println(curr);
         TransactionList.addTransaction(curr);
-        transactionsOfCustomer.add( curr.getTransactionId());
-        System.out.println(transactionsOfCustomer.size());
-        System.out.println(transactionsOfCustomer);
+        transactionsOfCustomer.add(curr.getTransactionId());
     }
     public ArrayList<Transaction> getAllTransactions(){
         ArrayList<Transaction> transactionsAll = new ArrayList<>();
-        System.out.println(transactionsOfCustomer.size());
         for(Integer transactionId : transactionsOfCustomer){
             transactionsAll.add(TransactionList.getTransaction(transactionId));
         }

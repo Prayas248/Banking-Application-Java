@@ -33,6 +33,7 @@ class PaytmWallet implements WalletOperations, PaymentType{
         }
         else{
             this.walletBalance = updatedBalance;
+            this.customer.addTransaction(amount, "Current", this.walletBalance);
         }
     }
 
@@ -44,6 +45,7 @@ class PaytmWallet implements WalletOperations, PaymentType{
         }
         else{
             this.walletBalance = updatedBalance;
+            this.customer.addTransaction(amount, "Current", this.walletBalance);
         }
     }
 
@@ -58,6 +60,7 @@ class PaytmWallet implements WalletOperations, PaymentType{
         }
         else{
             this.walletBalance = updatedBalance;
+            this.customer.addTransaction(amount, "Current", this.walletBalance);
         }
     }
 }
@@ -79,6 +82,7 @@ class PhonePeWallet implements WalletOperations, PaymentType{
         }
         else{
             this.walletBalance = updatedBalance;
+            this.customer.addTransaction(amount, "Current", this.walletBalance);
         }
     }
 
@@ -90,6 +94,7 @@ class PhonePeWallet implements WalletOperations, PaymentType{
         }
         else{
             this.walletBalance = updatedBalance;
+            this.customer.addTransaction(amount, "Current", this.walletBalance);
         }
     }
 
@@ -104,6 +109,7 @@ class PhonePeWallet implements WalletOperations, PaymentType{
         }
         else{
             this.walletBalance = updatedBalance;
+            this.customer.addTransaction(amount, "Current", this.walletBalance);
         }
     }
 }
