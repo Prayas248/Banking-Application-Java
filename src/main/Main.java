@@ -191,14 +191,11 @@ public class Main {
                         System.out.println("Customer not found.");
                         break;
                     }
-                    System.out.println("Enter target account type (Savings/Current): ");
-                    sc.nextLine();
-                    String targetType = sc.nextLine();
-                    PaymentType targetPayment = targetCustomer.getAccount(targetType);
-                    if (targetPayment == null || !(targetPayment instanceof BankAccount)) {
-                        System.out.println("Account type not found for target customer.");
-                        break;
-                    }
+
+                    System.out.println("Choose Receiver's account");
+                    PaymentType  targetPayment = targetCustomer.getAllAccounts();
+
+
                     System.out.println("Enter amount to transfer: ");
                     double amount = sc.nextDouble();
                     try {
