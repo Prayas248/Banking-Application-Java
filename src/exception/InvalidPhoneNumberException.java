@@ -1,13 +1,8 @@
 package exception;
 
-public class InvalidPhoneNumberException extends Exception{
-    private String message;
+public class InvalidPhoneNumberException extends Exception {
 
-    InvalidPhoneNumberException(String message){
-        this.message = message;
-    }
-
-    public String toString(){
-        return message;
+    public InvalidPhoneNumberException(String message) {
+        super(message);
     }
 }

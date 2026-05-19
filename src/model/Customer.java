@@ -1,25 +1,26 @@
 package model;
+import java.util.ArrayList;
 
 import util.TransactionList;
 
 import java.util.ArrayList;
 
 public class Customer {
-    private final int CustomerId;
-    private String CustomerName;
-    private String CustomerEmail;
-    private String CustomerPhoneNumber;
+
+    private int customerId;
+    private String customerName;
+    private String customerEmail;
+    private String customerPhoneNumber;
     private ArrayList<Integer> transactionsOfCustomer;
 
-    public Customer(int CustomerId,String CustomerName, String CustomerEmail, String CustomerPhoneNumber) {
-        this.CustomerId = CustomerId;
-        this.CustomerName = CustomerName;
-        this.CustomerEmail = CustomerEmail;
-        this.CustomerPhoneNumber = CustomerPhoneNumber;
-        transactionsOfCustomer = new ArrayList<>();
+    public Customer(int customerId, String customerName, String customerEmail, String customerPhoneNumber) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerPhoneNumber = customerPhoneNumber;
+      transactionsOfCustomer = new ArrayList<>();
     }
-
-    public void addTransaction(double amount, PaymentType type) {
+  public void addTransaction(double amount, PaymentType type) {
         Transaction curr = new Transaction(amount,type);
         transactionsOfCustomer.add(curr.getTransactionId());
     }
@@ -32,40 +33,44 @@ public class Customer {
     }
 
     public int getCustomerId() {
-        return CustomerId;
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {
-        return CustomerName;
+        return customerName;
     }
 
     public void setCustomerName(String customerName) {
-        CustomerName = customerName;
+        this.customerName = customerName;
     }
 
     public String getCustomerEmail() {
-        return CustomerEmail;
+        return customerEmail;
     }
 
     public void setCustomerEmail(String customerEmail) {
-        CustomerEmail = customerEmail;
+        this.customerEmail = customerEmail;
     }
 
     public String getCustomerPhoneNumber() {
-        return CustomerPhoneNumber;
+        return customerPhoneNumber;
     }
 
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        CustomerPhoneNumber = customerPhoneNumber;
+        this.customerPhoneNumber = customerPhoneNumber;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "CustomerId=" + CustomerId +
-                ", CustomerName='" + CustomerName + '\'' +
-                ", CustomerEmail='" + CustomerEmail + '\'' +
-                ", CustomerPhoneNumber='" + CustomerPhoneNumber + '\'' +
+                "customerName='" + customerName + '\'' +
+                ", customerId=" + customerId +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
                 '}';
     }
 }
