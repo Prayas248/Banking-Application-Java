@@ -1,7 +1,8 @@
 package model;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
+import java.util.Scanner;
 
 import util.TransactionList;
 
@@ -34,6 +35,28 @@ public class Customer extends CustomerService implements Cloneable {
 
     public PaymentType getAccount(String type) {
         return bankAccount.get(type);
+    }
+
+    public PaymentType getAllAccounts() {
+        int index = 1;
+
+        ArrayList<Map.Entry<String, PaymentType>> accounts =
+                new ArrayList<>(bankAccount.entrySet());
+
+        for (Map.Entry<String, PaymentType> entry : accounts) {
+            System.out.println(index + ". " + entry.getKey());
+            index++;
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Choose account: ");
+        int choice = sc.nextInt();
+
+        if (choice >= 1 && choice <= accounts.size()) {
+            return accounts.get(choice - 1).getValue();
+        }
+
+        System.out.println("Invalid choice");
+        return null;
     }
 
     // Returns any one account — used when switching customers to auto-select an account
@@ -109,8 +132,8 @@ public class Customer extends CustomerService implements Cloneable {
     @Override
     public String toString() {
         return "Customer{" +
-                "customerName='" + customerName + '\'' +
-                ", customerId=" + customerId +
+                "customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerPhoneNumber='" + customerPhoneNumber + '\'' +
                 '}';

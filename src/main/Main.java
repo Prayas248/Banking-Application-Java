@@ -131,6 +131,11 @@ public class Main {
                         System.out.println("Use Wallet Operations (option 6) to add money to a wallet.");
                         break;
                     }
+                    else{
+                        System.out.println("Choose your account");
+                        currAccount = currCustomer.getAllAccounts();
+
+                    }
                     System.out.println("Enter deposit amount: ");
                     double amount = sc.nextDouble();
                     try {
@@ -148,6 +153,10 @@ public class Main {
                     if (!(currAccount instanceof BankAccount)) {
                         System.out.println("Use Wallet Operations (option 6) to pay bills from a wallet.");
                         break;
+                    }
+                    else{
+                        System.out.println("Choose your account");
+                        currAccount = currCustomer.getAllAccounts();
                     }
                     System.out.println("Enter withdrawal amount: ");
                     double amount = sc.nextDouble();

@@ -4,7 +4,7 @@ import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 
 // Base class for all bank account types (Savings, Current)
-public abstract class BankAccount extends Customer {
+public abstract class BankAccount implements PaymentType{
     private int accountNumber;
     private Customer customer; // the owner of this account
     private double balance;
@@ -31,6 +31,14 @@ public abstract class BankAccount extends Customer {
     public abstract void withdraw(double amount) throws InvalidAmountException, InsufficientBalanceException;
     public abstract void transfer(BankAccount targetAccount, double amount) throws InvalidAmountException, InsufficientBalanceException;
     public abstract void displayDetails();
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "accountNumber=" + accountNumber +
+                ", customer=" + customer.getCustomerName() +
+                ", balance=" + balance +
+                '}';
+    }
 }
 
 
