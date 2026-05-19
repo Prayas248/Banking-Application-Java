@@ -1,17 +1,35 @@
 package model;
 import java.util.ArrayList;
 
+import util.TransactionList;
+
+import java.util.ArrayList;
+
 public class Customer {
+
     private int customerId;
     private String customerName;
     private String customerEmail;
     private String customerPhoneNumber;
+    private ArrayList<Integer> transactionsOfCustomer;
 
     public Customer(int customerId, String customerName, String customerEmail, String customerPhoneNumber) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhoneNumber = customerPhoneNumber;
+      transactionsOfCustomer = new ArrayList<>();
+    }
+  public void addTransaction(double amount, PaymentType type) {
+        Transaction curr = new Transaction(amount,type);
+        transactionsOfCustomer.add(curr.getTransactionId());
+    }
+    public ArrayList<Transaction> getAllTransactions(){
+        ArrayList<Transaction> transactionsAll = new ArrayList<>();
+        for(Integer transactionId : transactionsOfCustomer){
+            transactionsAll.add(TransactionList.getTransaction(transactionId));
+        }
+        return transactionsAll;
     }
 
     public int getCustomerId() {
