@@ -176,6 +176,10 @@ public class Main {
                         System.out.println("Use Wallet Operations (option 6) for wallet transfers.");
                         break;
                     }
+                    else{
+                        System.out.println("Choose your account");
+                        currAccount = currCustomer.getAllAccounts();
+                    }
                     System.out.println("Available customers:");
                     cs.showCustomersExcept(currCustomer.getCustomerId());
                     System.out.println("Enter target customer ID: ");
