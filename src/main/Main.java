@@ -2,13 +2,20 @@ package main;
 
 import exception.*;
 import model.*;
+import wallet.PaytmWallet;
+import wallet.PhonePeWallet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InvalidPhoneNumberException, DuplicateCustomerException, InvalidEmailException {
+    static Customer currCustomer;
+    static PaymentType currAccount;
+
+    public static void main(String[] args)
+            throws InvalidPhoneNumberException, DuplicateCustomerException, InvalidEmailException,
+            InsufficientBalanceException, InvalidAmountException, WalletLimitExceededException, AccountNotFound  {
         Scanner sc = new Scanner(System.in);
         Boolean ch = true;
         int customerCounter = 0;
@@ -46,6 +53,7 @@ public class Main {
 
                     try{
                         cs.createUser(customerCounter++, name, email, ph);
+                        currCustomer = new Customer(customerCounter, name, email, ph);
                     }
                     catch (InvalidEmailException | DuplicateCustomerException | InvalidPhoneNumberException e){
                         System.out.println(e);
@@ -64,32 +72,89 @@ public class Main {
 
                     int bankChoice = sc.nextInt();
 
+
+                    System.out.println("Enter your Account number: ");
+                    sc.nextLine();
+                    int accountId = sc.nextInt();
+                    System.out.println("Enter your Balance: ");
+                    int bal = sc.nextInt();
+
                     switch(bankChoice){
                         case 1:
-                            System.out.println("Enter your Account number: ");
-                            sc.nextLine();
-                            int accountId = sc.nextLine();
-                            System.out.println("Enter your Balance: ");
-                            int bal = sc.nextLine();
-
                             try{
-                                BankAccount currSav = new SavingsAccount(accountId,cs.getCustomers(customerCounter),bal);
+                                currAccount = new SavingsAccount(accountId,cs.getCustomers(),bal);
+                                currCustomer.addAccount("Savings", currAccount);
 
                             }
-                            catch()
-
-
+                            catch(Exception e){
+                                System.out.println("Entered wrong account details");
+                                e.printStackTrace();
+                            }
+                            break;
+                        case 2:
+                            try{
+                                currAccount = new CurrentAccount(accountId,cs.getCustomers(),bal);
+                                currCustomer.addAccount("Current", currAccount);
+                            }
+                            catch(Exception e){
+                                System.out.println("Entered wrong account details");
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Enter choice for the wallet account: ");
+                            System.out.println("1. Paytm, 2. Phone");
+                            int walletInp = sc.nextInt();
+                            switch(walletInp){
+                                case(1):
+                                    try{
+                                        currAccount = new PaytmWallet(currCustomer);
+                                        currCustomer.addAccount("Wallet", currAccount);
+                                    }
+                                    catch(Exception e){
+                                        System.out.println("Entered wrong account details");
+                                    }
+                                    break;
+                                case(2):
+                                    try{
+                                        currAccount = new PhonePeWallet(currCustomer);
+                                        currCustomer.addAccount("Wallet", currAccount);
+                                    }
+                                    catch(Exception e){
+                                        System.out.println("Entered wrong account details");
+                                    }
+                                    break;
+                            }
 
                     }
 
                 }
                 case 3:
+                    System.out.println("Enter");
+                    break;
                 case 4:
+                    break;
                 case 5:
+                    break;
                 case 6:
+                    break;
                 case 7:
+                    break;
                 case 8:
+                    break;
                 case 9:
+                    cs.showCustomers();
+                    System.out.println("Select id you want to switch back: ");
+                    int switchID = sc.nextInt();
+                    try{
+                        currCustomer = cs.getCustomers(switchID);
+
+                    }
+                    catch (IndexOutOfBoundsException e){
+                        System.out.println("Entered customer ID is not found");
+                    }
+
+                    break;
+                case 10:
                 {
                     System.out.println();
                     System.out.println("------------------------");

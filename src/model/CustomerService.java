@@ -22,7 +22,15 @@ public class CustomerService {
 
         customers.add(new Customer(id, name, email, mobileNo));
         System.out.println("Account creation successful");
+        System.out.println(customers);
     }
+
+    public void showCustomers(){
+        for(int i=0;i<customers.size();i++){
+            System.out.println((customers.get(i).getCustomerId())+1 + ", " + customers.get(i).getCustomerName());
+        }
+    }
+
 
     // Id Validation
     private void validateId(int id) throws DuplicateCustomerException {
@@ -40,8 +48,14 @@ public class CustomerService {
         }
     }
 
-    public Customer getCustomers(int index) {
-        return customers.get(index-1);
+    public Customer getCustomers(int id) {
+        System.out.println(customers);
+        return customers.get(id-1);
+    }
+
+    public Customer getCustomers() {
+        System.out.println(customers);
+        return customers.get(customers.size() - 1);
     }
 
     // Mobile number validation
@@ -51,4 +65,6 @@ public class CustomerService {
         }
 
     }
+
+
 }

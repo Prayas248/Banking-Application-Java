@@ -5,6 +5,7 @@ import util.TransactionList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Customer extends CustomerService {
 
@@ -14,7 +15,7 @@ public class Customer extends CustomerService {
     private String customerPhoneNumber;
     private ArrayList<Integer> transactionsOfCustomer = new ArrayList<>();
     private static int customerCounter;
-    private ArrayList<String, BankAccount > bankAccount;
+    private HashMap<String, PaymentType > bankAccount = new HashMap<>();
 
     public Customer(){}
 
@@ -24,8 +25,8 @@ public class Customer extends CustomerService {
         this.customerEmail = customerEmail;
         this.customerPhoneNumber = customerPhoneNumber;
     }
-    public addAccount(String type, BankAccount bankAccount){
-        this.bankAccount.put(type, BankAccount);
+    public void addAccount(String type, PaymentType bankAccount){
+        this.bankAccount.put(type, bankAccount);
     }
   public void addTransaction(double amount, String type, double balance) {
         Transaction curr = new Transaction(amount,type, balance);
