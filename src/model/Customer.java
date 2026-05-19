@@ -12,6 +12,7 @@ public class Customer extends CustomerService {
     private String customerEmail;
     private String customerPhoneNumber;
     private ArrayList<Integer> transactionsOfCustomer = new ArrayList<>();
+    private static int customerCounter;
 
     public Customer(){}
 
