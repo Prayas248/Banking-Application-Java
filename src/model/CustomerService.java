@@ -40,10 +40,15 @@ public class CustomerService {
         }
     }
 
+    public Customer getCustomers(int index) {
+        return customers.get(index-1);
+    }
+
     // Mobile number validation
     private void validateMobileNo(String mobileNo) throws InvalidPhoneNumberException {
         if (!mobileNo.matches("[0-9]{10}")) {
             throw new InvalidPhoneNumberException("[ERROR] Phone number must be exactly 10 digits");
         }
+
     }
 }

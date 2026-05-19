@@ -8,6 +8,7 @@ public abstract class BankAccount extends Customer {
     private Customer customer;
     private double balance;
 
+
     public BankAccount() {
         super();
     }

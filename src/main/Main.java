@@ -64,6 +64,24 @@ public class Main {
 
                     int bankChoice = sc.nextInt();
 
+                    switch(bankChoice){
+                        case 1:
+                            System.out.println("Enter your Account number: ");
+                            sc.nextLine();
+                            int accountId = sc.nextLine();
+                            System.out.println("Enter your Balance: ");
+                            int bal = sc.nextLine();
+
+                            try{
+                                BankAccount currSav = new SavingsAccount(accountId,cs.getCustomers(customerCounter),bal);
+
+                            }
+                            catch()
+
+
+
+                    }
+
                 }
                 case 3:
                 case 4:
