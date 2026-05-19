@@ -3,8 +3,9 @@ package model;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 
+// Savings account with a minimum balance requirement
 public class SavingsAccount extends BankAccount implements PaymentType {
-    private static final double MIN_BALANCE = 0;
+    private static final double MIN_BALANCE = 0; // minimum allowed balance after withdrawal
 
     public SavingsAccount() {
         super();
@@ -20,7 +21,7 @@ public class SavingsAccount extends BankAccount implements PaymentType {
             throw new InvalidAmountException("Deposit amount must be greater than zero");
         }
         setBalance(getBalance() + amount);
-        addTransaction(amount, "Savings", this.getBalance());
+        getCustomer().addTransaction(amount, "Savings", this.getBalance());
         System.out.println("Deposited ₹" + amount + " | New Balance: ₹" + getBalance());
     }
 
@@ -29,13 +30,14 @@ public class SavingsAccount extends BankAccount implements PaymentType {
         if (amount <= 0) {
             throw new InvalidAmountException("Withdrawal amount must be greater than zero");
         }
+        // Ensure the balance does not drop below the minimum after withdrawal
         if (getBalance() - amount < MIN_BALANCE) {
             throw new InsufficientBalanceException(
                     "Insufficient balance. Savings account must maintain a minimum balance of ₹" + MIN_BALANCE
             );
         }
         setBalance(getBalance() - amount);
-        addTransaction(amount, "Savings", this.getBalance());
+        getCustomer().addTransaction(amount, "Savings", this.getBalance());
         System.out.println("Withdrawn ₹" + amount + " | New Balance: ₹" + getBalance());
     }
 
@@ -44,16 +46,16 @@ public class SavingsAccount extends BankAccount implements PaymentType {
         if (targetAccount == null) {
             throw new IllegalArgumentException("Target account cannot be null");
         }
+        // Prevent transferring to the same account
         if (this.getAccountNumber() == targetAccount.getAccountNumber()) {
             throw new IllegalArgumentException("Cannot transfer to the same account");
         }
         if (amount <= 0) {
             throw new InvalidAmountException("Transfer amount must be greater than zero");
         }
+        // Reuse withdraw and deposit to keep transaction records consistent
         withdraw(amount);
         targetAccount.deposit(amount);
-        addTransaction(amount, "Savings", this.getBalance());
-        targetAccount.addTransaction(amount, "Savings", targetAccount.getBalance());
         System.out.println("Transferred ₹" + amount + " to Account #" + targetAccount.getAccountNumber());
     }
 

@@ -5,14 +5,14 @@ import util.TransactionList;
 import java.time.LocalDateTime;
 
 
+// Represents a single financial transaction (deposit, withdrawal, or transfer)
 public class Transaction{
-    private static int counter;
+    private static int counter; // auto-incremented to give each transaction a unique ID
     private Integer transactionId;
     private final double amount;
-//    private final PaymentType type;
-    private String type;
-    private LocalDateTime timestamp;
-    private double balance;
+    private String type; // account type involved: "Savings", "Current", "Paytm", "PhonePe"
+    private LocalDateTime timestamp; // exact date and time the transaction occurred
+    private double balance; // account balance after this transaction
 
     public Transaction(double amount, String type, double balance) {
         this.transactionId = counter++;
@@ -36,6 +36,10 @@ public class Transaction{
 
     public LocalDateTime getTimestamp() {
         return timestamp;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     @Override

@@ -1,21 +1,22 @@
 package model;
 import java.util.ArrayList;
-
-import util.TransactionList;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Customer extends CustomerService {
+import util.TransactionList;
+
+// Represents a bank customer who can hold multiple accounts and wallets
+public class Customer extends CustomerService implements Cloneable {
 
     private int customerId;
     private String customerName;
     private String customerEmail;
     private String customerPhoneNumber;
+    // Stores transaction IDs (not full objects) to look up from the global TransactionList
     private ArrayList<Integer> transactionsOfCustomer = new ArrayList<>();
     private static int customerCounter;
-    private HashMap<String, PaymentType > bankAccount = new HashMap<>();
+    // Maps account type name (e.g. "Savings", "Paytm") to the account object
+    private HashMap<String, PaymentType> bankAccount = new HashMap<>();
 
     public Customer(){}
 
@@ -25,20 +26,52 @@ public class Customer extends CustomerService {
         this.customerEmail = customerEmail;
         this.customerPhoneNumber = customerPhoneNumber;
     }
+
+    // Register a new account or wallet under a given type name
     public void addAccount(String type, PaymentType bankAccount){
         this.bankAccount.put(type, bankAccount);
     }
-  public void addTransaction(double amount, String type, double balance) {
-        Transaction curr = new Transaction(amount,type, balance);
+
+    public PaymentType getAccount(String type) {
+        return bankAccount.get(type);
+    }
+
+    // Returns any one account — used when switching customers to auto-select an account
+    public PaymentType getFirstAccount() {
+        if (!bankAccount.isEmpty()) {
+            return bankAccount.values().iterator().next();
+        }
+        return null;
+    }
+
+    // Creates a transaction record and stores its ID for this customer
+    public void addTransaction(double amount, String type, double balance) {
+        Transaction curr = new Transaction(amount, type, balance);
         TransactionList.addTransaction(curr);
         transactionsOfCustomer.add(curr.getTransactionId());
     }
+
+    // Fetches full transaction objects from the global store using stored IDs
     public ArrayList<Transaction> getAllTransactions(){
         ArrayList<Transaction> transactionsAll = new ArrayList<>();
         for(Integer transactionId : transactionsOfCustomer){
             transactionsAll.add(TransactionList.getTransaction(transactionId));
         }
         return transactionsAll;
+    }
+
+    // Shallow clone: shares the same transaction list and account map references
+    public Customer shallowClone() throws CloneNotSupportedException {
+        return (Customer) super.clone();
+    }
+
+    // Deep clone: creates new copies of the transaction list and account map
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Customer cloned = (Customer) super.clone();
+        cloned.transactionsOfCustomer = new ArrayList<>(this.transactionsOfCustomer);
+        cloned.bankAccount = new HashMap<>(this.bankAccount);
+        return cloned;
     }
 
     public int getCustomerId() {

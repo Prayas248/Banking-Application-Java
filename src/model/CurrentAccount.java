@@ -4,6 +4,7 @@ package model;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 
+// Current account with no minimum balance restriction
 public class CurrentAccount extends BankAccount implements PaymentType {
 
     public CurrentAccount() {
@@ -20,8 +21,7 @@ public class CurrentAccount extends BankAccount implements PaymentType {
             throw new InvalidAmountException("Deposit amount must be greater than zero");
         }
         setBalance(getBalance() + amount);
-        addTransaction(amount, "Current", this.getBalance());
-
+        getCustomer().addTransaction(amount, "Current", this.getBalance());
         System.out.println("Deposited ₹" + amount + " | New Balance: ₹" + getBalance());
     }
 
@@ -30,11 +30,12 @@ public class CurrentAccount extends BankAccount implements PaymentType {
         if (amount <= 0) {
             throw new InvalidAmountException("Withdrawal amount must be greater than zero");
         }
+        // Current account balance cannot go negative
         if (amount > getBalance()) {
             throw new InsufficientBalanceException("Insufficient balance. Available: ₹" + getBalance());
         }
         setBalance(getBalance() - amount);
-        addTransaction(amount, "Current", this.getBalance());
+        getCustomer().addTransaction(amount, "Current", this.getBalance());
         System.out.println("Withdrawn ₹" + amount + " | New Balance: ₹" + getBalance());
     }
 
@@ -43,16 +44,16 @@ public class CurrentAccount extends BankAccount implements PaymentType {
         if (targetAccount == null) {
             throw new IllegalArgumentException("Target account cannot be null");
         }
+        // Prevent transferring to the same account
         if (this.getAccountNumber() == targetAccount.getAccountNumber()) {
             throw new IllegalArgumentException("Cannot transfer to the same account");
         }
         if (amount <= 0) {
             throw new InvalidAmountException("Transfer amount must be greater than zero");
         }
+        // Reuse withdraw and deposit to keep transaction records consistent
         withdraw(amount);
         targetAccount.deposit(amount);
-        addTransaction(amount, "Current", this.getBalance());
-        targetAccount.addTransaction(amount, "Current", targetAccount.getBalance());
         System.out.println("Transferred ₹" + amount + " to Account #" + targetAccount.getAccountNumber());
     }
 

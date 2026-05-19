@@ -3,9 +3,10 @@ package model;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 
+// Base class for all bank account types (Savings, Current)
 public abstract class BankAccount extends Customer {
     private int accountNumber;
-    private Customer customer;
+    private Customer customer; // the owner of this account
     private double balance;
 
 
@@ -25,6 +26,7 @@ public abstract class BankAccount extends Customer {
     public double getBalance() { return balance; }
     public void setBalance(double balance) { this.balance = balance; }
 
+    // Each account type must define its own deposit, withdraw, transfer, and display logic
     public abstract void deposit(double amount) throws InvalidAmountException;
     public abstract void withdraw(double amount) throws InvalidAmountException, InsufficientBalanceException;
     public abstract void transfer(BankAccount targetAccount, double amount) throws InvalidAmountException, InsufficientBalanceException;
