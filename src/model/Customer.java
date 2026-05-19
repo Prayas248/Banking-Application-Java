@@ -23,6 +23,13 @@ public class Customer {
         Transaction curr = new Transaction(amount,type);
         transactionsOfCustomer.add(curr.getTransactionId());
     }
+    public ArrayList<Transaction> getAllTransactions(){
+        ArrayList<Transaction> transactionsAll = new ArrayList<>();
+        for(Integer transactionId : transactionsOfCustomer){
+            transactionsAll.add(TransactionList.getTransaction(transactionId));
+        }
+        return transactionsAll;
+    }
 
     public int getCustomerId() {
         return CustomerId;
