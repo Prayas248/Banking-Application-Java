@@ -4,22 +4,25 @@ import util.TransactionList;
 
 import java.time.LocalDateTime;
 
+
 public class Transaction{
     private static int counter;
-    private int transactionId;
+    private Integer transactionId;
     private final double amount;
-    private final PaymentType type;
-    private final LocalDateTime timestamp;
+//    private final PaymentType type;
+    private String type;
+    private LocalDateTime timestamp;
+    private double balance;
 
-    public Transaction(double amount, PaymentType type) {
+    public Transaction(double amount, String type, double balance) {
         this.transactionId = counter++;
         this.amount = amount;
         this.type = type;
-        timestamp = new LocalDateTime.now();
-        TransactionList.addTransaction(this);
+        this.timestamp = LocalDateTime.now();
+        this.balance = balance;
     }
 
-    public int getTransactionId() {
+    public Integer getTransactionId() {
         return transactionId;
     }
 
@@ -27,7 +30,7 @@ public class Transaction{
         return amount;
     }
 
-    public PaymentType getType() {
+    public String getType() {
         return type;
     }
 
@@ -38,9 +41,11 @@ public class Transaction{
     @Override
     public String toString() {
         return "Transaction{" +
-                "amount=" + amount +
+                "Id: " + transactionId +
+                ", amount=" + amount +
                 ", type=" + type +
                 ", timestamp=" + timestamp +
+                ", Balance=" + balance +
                 '}';
     }
 }

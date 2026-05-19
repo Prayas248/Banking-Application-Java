@@ -5,27 +5,33 @@ import util.TransactionList;
 
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer extends CustomerService {
 
     private int customerId;
     private String customerName;
     private String customerEmail;
     private String customerPhoneNumber;
-    private ArrayList<Integer> transactionsOfCustomer;
+    private ArrayList<Integer> transactionsOfCustomer = new ArrayList<>();
+
+    public Customer(){}
 
     public Customer(int customerId, String customerName, String customerEmail, String customerPhoneNumber) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhoneNumber = customerPhoneNumber;
-      transactionsOfCustomer = new ArrayList<>();
     }
-  public void addTransaction(double amount, PaymentType type) {
-        Transaction curr = new Transaction(amount,type);
-        transactionsOfCustomer.add(curr.getTransactionId());
+  public void addTransaction(double amount, String type, double balance) {
+        Transaction curr = new Transaction(amount,type, balance);
+        System.out.println(curr);
+        TransactionList.addTransaction(curr);
+        transactionsOfCustomer.add( curr.getTransactionId());
+        System.out.println(transactionsOfCustomer.size());
+        System.out.println(transactionsOfCustomer);
     }
     public ArrayList<Transaction> getAllTransactions(){
         ArrayList<Transaction> transactionsAll = new ArrayList<>();
+        System.out.println(transactionsOfCustomer.size());
         for(Integer transactionId : transactionsOfCustomer){
             transactionsAll.add(TransactionList.getTransaction(transactionId));
         }

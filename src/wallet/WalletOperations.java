@@ -2,13 +2,13 @@ package wallet;
 
 import exception.AccountNotFound;
 import exception.InsufficientBalanceException;
-import exception.InvalidAmountException;
+import exception.WalletLimitExceededException;
 import model.Customer;
 import model.PaymentType;
 import util.FileLogger;
 
 public interface WalletOperations {
-    void addMoney(double amount) throws InvalidAmountException;
+    void addMoney(double amount) throws WalletLimitExceededException;
     void payBill(double amount) throws InsufficientBalanceException;
     void transferToWallet(Customer customer, double amount) throws Exception;
 }
@@ -24,12 +24,12 @@ class PaytmWallet implements WalletOperations, PaymentType{
     }
 
     @Override
-    public void addMoney(double amount) throws InvalidAmountException {
+    public void addMoney(double amount) throws WalletLimitExceededException {
         double updatedBalance = amount + this.walletBalance;
         if(updatedBalance > 50000){
             logger = new FileLogger(customer);
             logger.log("Wallet has exceeded the maximum amount");
-            throw new InvalidAmountException("Wallet has exceeded the maximum amount");
+            throw new WalletLimitExceededException("Wallet has exceeded the maximum amount");
         }
         else{
             this.walletBalance = updatedBalance;
@@ -72,10 +72,10 @@ class PhonePeWallet implements WalletOperations, PaymentType{
     }
 
     @Override
-    public void addMoney(double amount) throws InvalidAmountException {
+    public void addMoney(double amount) throws WalletLimitExceededException {
         double updatedBalance = amount + this.walletBalance;
         if(updatedBalance > 50000){
-            throw new InvalidAmountException("Wallet has exceeded the maximum amount");
+            throw new WalletLimitExceededException("Wallet has exceeded the maximum amount");
         }
         else{
             this.walletBalance = updatedBalance;
