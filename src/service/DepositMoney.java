@@ -1,5 +1,6 @@
 package service;
 
+import exception.AccountNotFound;
 import exception.InvalidAmountException;
 import main.Main;
 import model.BankAccount;
@@ -21,10 +22,15 @@ public class DepositMoney {
         }
         else{
             System.out.println("Choose your account");
-            Main.currAccount = Main.currCustomer.getAllAccounts();
-            if(Main.currAccount == null){
+            try{
+                Main.currAccount = Main.currCustomer.getAllAccounts();
+            }
+            catch (AccountNotFound e){
+                System.out.println(e.getMessage());
                 return;
             }
+
+
         }
         System.out.println("Enter deposit amount: ");
         double amount = sc.nextDouble();

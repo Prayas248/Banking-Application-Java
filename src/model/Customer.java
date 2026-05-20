@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import exception.AccountNotFound;
 import util.TransactionList;
 
 // Represents a bank customer who can hold multiple accounts and wallets
@@ -37,32 +38,24 @@ public class Customer extends CustomerService implements Cloneable {
         return bankAccount.get(type);
     }
 
-    public PaymentType getAllAccounts() {
+    public PaymentType getAllAccounts() throws AccountNotFound {
 
         ArrayList<Map.Entry<String, PaymentType>> accounts =
                 new ArrayList<>(bankAccount.entrySet());
-        boolean flag = true;
-        while(flag) {
-            int index = 1;
-            for (Map.Entry<String, PaymentType> entry : accounts) {
-                System.out.println(index + ". " + entry.getKey());
-                index++;
-            }
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Choose account: ");
-            int choice = sc.nextInt();
-
-            if (choice >= 1 && choice <= accounts.size()) {
-                return accounts.get(choice - 1).getValue();
-            } else {
-                System.out.println("Wrong choice");
-                System.out.println("Going ");
-                flag=true;
-            }
+        int index = 1;
+        for (Map.Entry<String, PaymentType> entry : accounts) {
+            System.out.println(index + ". " + entry.getKey());
+            index++;
         }
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Choose account: ");
+        int choice = sc.nextInt();
 
-        System.out.println("Invalid choice");
-        return null;
+        if (choice >= 1 && choice <= accounts.size()) {
+            return accounts.get(choice - 1).getValue();
+        } else {
+            throw new AccountNotFound("No such account exists");
+        }
     }
 
     // Returns any one account — used when switching customers to auto-select an account

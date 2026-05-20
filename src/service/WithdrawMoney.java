@@ -1,5 +1,6 @@
 package service;
 
+import exception.AccountNotFound;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 import main.Main;
@@ -22,7 +23,13 @@ public class WithdrawMoney {
         }
         else{
             System.out.println("Choose your account");
-            Main.currAccount = Main.currCustomer.getAllAccounts();
+            try{
+                Main.currAccount = Main.currCustomer.getAllAccounts();
+            }
+            catch (AccountNotFound e){
+                System.out.println(e.getMessage());
+                return;
+            }
         }
         System.out.println("Enter withdrawal amount: ");
         double amount = sc.nextDouble();

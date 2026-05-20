@@ -1,5 +1,6 @@
 package service;
 
+import exception.AccountNotFound;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 import main.Main;
@@ -25,7 +26,13 @@ public class TransferMoney {
         }
         else{
             System.out.println("Choose your account");
-            Main.currAccount = Main.currCustomer.getAllAccounts();
+            try{
+                Main.currAccount = Main.currCustomer.getAllAccounts();
+            }
+            catch (AccountNotFound e){
+                System.out.println(e.getMessage());
+                return;
+            }
         }
         System.out.println("Available customers:");
         cs.showCustomersExcept(Main.currCustomer.getCustomerId());
@@ -40,7 +47,16 @@ public class TransferMoney {
         }
 
         System.out.println("Choose Receiver's account");
-        PaymentType targetPayment = targetCustomer.getAllAccounts();
+        PaymentType targetPayment=null;
+        try{
+            targetPayment = targetCustomer.getAllAccounts();
+        }
+        catch (AccountNotFound e){
+            System.out.println(e.getMessage());
+            return;
+        }
+
+
 
 
         System.out.println("Enter amount to transfer: ");
