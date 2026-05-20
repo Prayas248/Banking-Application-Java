@@ -22,7 +22,9 @@ public class DepositMoney {
         else{
             System.out.println("Choose your account");
             Main.currAccount = Main.currCustomer.getAllAccounts();
-
+            if(Main.currAccount == null){
+                return;
+            }
         }
         System.out.println("Enter deposit amount: ");
         double amount = sc.nextDouble();

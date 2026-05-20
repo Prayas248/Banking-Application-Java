@@ -38,21 +38,27 @@ public class Customer extends CustomerService implements Cloneable {
     }
 
     public PaymentType getAllAccounts() {
-        int index = 1;
 
         ArrayList<Map.Entry<String, PaymentType>> accounts =
                 new ArrayList<>(bankAccount.entrySet());
+        boolean flag = true;
+        while(flag) {
+            int index = 1;
+            for (Map.Entry<String, PaymentType> entry : accounts) {
+                System.out.println(index + ". " + entry.getKey());
+                index++;
+            }
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Choose account: ");
+            int choice = sc.nextInt();
 
-        for (Map.Entry<String, PaymentType> entry : accounts) {
-            System.out.println(index + ". " + entry.getKey());
-            index++;
-        }
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Choose account: ");
-        int choice = sc.nextInt();
-
-        if (choice >= 1 && choice <= accounts.size()) {
-            return accounts.get(choice - 1).getValue();
+            if (choice >= 1 && choice <= accounts.size()) {
+                return accounts.get(choice - 1).getValue();
+            } else {
+                System.out.println("Wrong choice");
+                System.out.println("Going ");
+                flag=true;
+            }
         }
 
         System.out.println("Invalid choice");
