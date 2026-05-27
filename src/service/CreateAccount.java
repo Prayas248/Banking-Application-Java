@@ -1,6 +1,7 @@
 package service;
 
 import main.Main;
+import model.BankAccount;
 import model.CurrentAccount;
 import model.SavingsAccount;
 import wallet.PaytmWallet;
@@ -80,10 +81,10 @@ public class CreateAccount {
                 try {
                     Main.currAccount = new PaytmWallet(Main.currCustomer);
                     Main.currCustomer.addAccount("Paytm", Main.currAccount);
-                    logger.info("Paytm wallet created successfully for accountId={}  |  customerId ={}", accountId, Main.currCustomer.getCustomerId());
+                    logger.info("Paytm wallet created successfully for accountId={}  |  customerId ={}",((BankAccount) Main.currAccount).getAccountNumber(), Main.currCustomer.getCustomerId());
 
                 } catch (Exception e) {
-                    logger.error("Failed to create a Paytm wallet for accountId={}  |  customerId ={}", accountId, Main.currCustomer.getCustomerId());
+                    logger.error("Failed to create a Paytm wallet for accountId={}  |  customerId ={}", ((BankAccount) Main.currAccount).getAccountNumber(), Main.currCustomer.getCustomerId());
 
                     System.out.println("Entered wrong account details");
                 }
@@ -91,11 +92,11 @@ public class CreateAccount {
                 try {
                     Main.currAccount = new PhonePeWallet(Main.currCustomer);
                     Main.currCustomer.addAccount("PhonePe", Main.currAccount);
-                    logger.info("PhonePe wallet created successfully for accountId={}  |  customerId ={}", accountId, Main.currCustomer.getCustomerId());
+                    logger.info("PhonePe wallet created successfully for accountId={}  |  customerId ={}", ((BankAccount) Main.currAccount).getAccountNumber(), Main.currCustomer.getCustomerId());
 
                     System.out.println("PhonePe wallet created successfully.");
                 } catch (Exception e) {
-                    logger.error("Failed to create a PhonePe wallet for accountId={}  |  customerId ={}", accountId, Main.currCustomer.getCustomerId());
+                    logger.error("Failed to create a PhonePe wallet for accountId={}  |  customerId ={}", ((BankAccount) Main.currAccount).getAccountNumber(), Main.currCustomer.getCustomerId());
 
                     System.out.println("Entered wrong account details");
                 }
