@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class DepositMoney {
 
-    private static Logger logger = LoggerFactory.getLogger(DepositMoney.class);
+    private static final Logger logger = LoggerFactory.getLogger(DepositMoney.class);
 
     public DepositMoney() {
 

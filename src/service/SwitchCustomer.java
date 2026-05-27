@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class SwitchCustomer {
 
-    private static Logger logger = LoggerFactory.getLogger(SwitchCustomer.class);
+    private static final Logger logger = LoggerFactory.getLogger(SwitchCustomer.class);
 
     private static int customerCounter;
     public SwitchCustomer() {
