@@ -30,7 +30,7 @@ public class SwitchCustomer {
             Main.currCustomer = cs.getCustomers(switchID);
             Main.currAccount = Main.currCustomer.getFirstAccount();
 
-            logger.info("Customer switched successfully to accountId = {} | customerId = {}",((BankAccount) Main.currAccount).getAccountNumber(),Main.currCustomer.getCustomerId());
+            logger.info("Customer switched successfully to customerId = {}",Main.currCustomer.getCustomerId());
 
             System.out.println("Switched to: " + Main.currCustomer.getCustomerName());
             if (Main.currAccount == null) {

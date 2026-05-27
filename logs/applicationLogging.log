@@ -1,0 +1,53 @@
+2026-05-28 01:44:12 [main] INFO  main.Main - Starting The Application..........
+2026-05-28 01:44:12 [main] INFO  model.CustomerService - CustomerService initialized | customer list ready
+2026-05-28 01:44:12 [main] INFO  main.Main - Initialisations Done.............
+2026-05-28 01:44:17 [main] INFO  service.CreateCustomer - Creation of customer started
+2026-05-28 01:44:27 [main] DEBUG service.CreateCustomer - Received information for username = Prayas | id=0
+2026-05-28 01:44:27 [main] DEBUG model.CustomerService - createUser invoked | id=0 | name=Prayas | email=prayas@gmail.com | mobileNo=1234567890
+2026-05-28 01:44:27 [main] INFO  model.CustomerService - CustomerService initialized | customer list ready
+2026-05-28 01:44:27 [main] INFO  model.CustomerService - Customer added successfully | id=0 | name=Prayas | totalCustomers=1
+2026-05-28 01:44:27 [main] INFO  service.CreateCustomer - User created successfully for username = Prayas | id=0
+2026-05-28 01:44:27 [main] DEBUG model.CustomerService - Fetching most recently added customer | totalCustomers=1
+2026-05-28 01:44:29 [main] INFO  service.CreateAccount - Creation of account started
+2026-05-28 01:44:30 [main] DEBUG service.CreateAccount - User selected account type option=1
+2026-05-28 01:44:34 [main] DEBUG service.CreateAccount - Received account balance of accountId=100  |  customerId = 0 
+2026-05-28 01:44:34 [main] INFO  service.CreateAccount - Savings account created successfully for accountId=100  |  customerId =0
+2026-05-28 01:44:38 [main] INFO  service.CreateCustomer - Creation of customer started
+2026-05-28 01:44:53 [main] DEBUG service.CreateCustomer - Received information for username = Ashwin | id=1
+2026-05-28 01:44:53 [main] DEBUG model.CustomerService - createUser invoked | id=1 | name=Ashwin | email=ashwin@gmail.com | mobileNo=0987654321
+2026-05-28 01:44:53 [main] INFO  model.CustomerService - CustomerService initialized | customer list ready
+2026-05-28 01:44:53 [main] INFO  model.CustomerService - Customer added successfully | id=1 | name=Ashwin | totalCustomers=2
+2026-05-28 01:44:53 [main] INFO  service.CreateCustomer - User created successfully for username = Ashwin | id=1
+2026-05-28 01:44:53 [main] DEBUG model.CustomerService - Fetching most recently added customer | totalCustomers=2
+2026-05-28 01:44:57 [main] INFO  service.SwitchCustomer - Switching customer service started
+2026-05-28 01:44:57 [main] DEBUG model.CustomerService - showCustomers invoked | totalCustomers=2
+2026-05-28 01:44:58 [main] DEBUG service.SwitchCustomer - Selecting customer ID to switch to switchId = 1 
+2026-05-28 01:44:58 [main] DEBUG model.CustomerService - Lookup customer by id | id=1
+2026-05-28 01:44:58 [main] INFO  service.SwitchCustomer - Customer switched successfully to customerId = 1
+2026-05-28 01:44:58 [main] WARN  service.SwitchCustomer - Account not found
+2026-05-28 01:45:00 [main] INFO  service.CreateAccount - Creation of account started
+2026-05-28 01:45:02 [main] DEBUG service.CreateAccount - User selected account type option=2
+2026-05-28 01:45:10 [main] DEBUG service.CreateAccount - Received account balance of accountId=121  |  customerId = 1 
+2026-05-28 01:45:10 [main] INFO  service.CreateAccount - Current account created successfully for accountId=121  |  customerId =1
+2026-05-28 01:45:12 [main] INFO  service.DepositMoney - Deposit Money Service invoked
+2026-05-28 01:45:15 [main] INFO  service.DepositMoney - Current account using for deposit is BankAccount{accountNumber=121, customer=Ashwin, balance=3333.0}
+2026-05-28 01:45:18 [main] DEBUG service.DepositMoney - Deposit amount is 10.0 for accountId = 121 | customerId = 1
+2026-05-28 01:45:18 [main] DEBUG util.TransactionList - Added transaction with id = 0 to the central transaction list
+2026-05-28 01:45:18 [main] INFO  service.DepositMoney - Deposit successful for accountId = 121 | customerId = 1
+2026-05-28 01:45:20 [main] INFO  service.TransferMoney - Transfer Money Service Started
+2026-05-28 01:45:22 [main] INFO  service.TransferMoney - Accounts Found for customerId = 1
+2026-05-28 01:45:22 [main] DEBUG model.CustomerService - showCustomersExcept invoked | excludeId=1
+2026-05-28 01:45:24 [main] DEBUG service.TransferMoney - Transfer Money Service targetId=0 
+2026-05-28 01:45:24 [main] DEBUG model.CustomerService - Lookup customer by id | id=0
+2026-05-28 01:45:24 [main] INFO  service.TransferMoney - Fetched Customer with customerId=0 
+2026-05-28 01:45:28 [main] INFO  service.TransferMoney - Fetched Receiver's account with accountId = 100, customerId = 0
+2026-05-28 01:45:30 [main] DEBUG service.TransferMoney - Transfer Money Service amount=100.0 from customerId = 1 to receiver with customerId = 0
+2026-05-28 01:45:30 [main] DEBUG util.TransactionList - Added transaction with id = 1 to the central transaction list
+2026-05-28 01:45:30 [main] DEBUG util.TransactionList - Added transaction with id = 2 to the central transaction list
+2026-05-28 01:45:30 [main] INFO  service.TransferMoney - Transfer Successful
+2026-05-28 01:45:37 [main] INFO  service.ViewTransactions - ViewTransactionService has started
+2026-05-28 01:45:37 [main] DEBUG service.ViewTransactions - Account found for customerId = 1
+2026-05-28 01:45:37 [main] DEBUG util.TransactionList - Retrieving transaction with id = 0 from the central transaction list
+2026-05-28 01:45:37 [main] DEBUG util.TransactionList - Retrieving transaction with id = 1 from the central transaction list
+2026-05-28 01:45:37 [main] INFO  service.ViewTransactions - Transactions found for customerId = 1
+2026-05-28 01:45:43 [main] INFO  main.Main - Exiting Application............

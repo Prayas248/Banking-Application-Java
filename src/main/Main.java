@@ -3,6 +3,8 @@ package main;
 import exception.*;
 import java.util.Scanner;
 import model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.*;
 
 public class Main {
@@ -11,13 +13,19 @@ public class Main {
     // Currently active account (bank account or wallet) for the selected customer
     public static PaymentType currAccount;
 
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args)
             throws InvalidPhoneNumberException, DuplicateCustomerException, InvalidEmailException,
             InsufficientBalanceException, InvalidAmountException, WalletLimitExceededException, AccountNotFound {
+
+        logger.info("Starting The Application..........");
+
         Scanner sc = new Scanner(System.in);
         Boolean ch = true;
         CustomerService cs = new CustomerService();
 
+        logger.info("Initialisations Done.............");
         // Keep showing the menu until the user chooses to exit
         while (ch) {
             System.out.println();
@@ -76,12 +84,18 @@ public class Main {
                     break;
                 }
                 case 10: { // Exit the application
+                    logger.info("Exiting Application............");
                     System.out.println();
                     System.out.println("------------------------");
                     System.out.println("Thank you for Banking with us!");
                     System.out.println("------------------------");
                     System.out.println();
                     ch = false;
+                    break;
+                }
+                default: {
+                    logger.warn("Invalid menu choice selected");
+                    System.out.println("Invalid choice.");
                     break;
                 }
             }
